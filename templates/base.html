@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Brain Tumor Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Brain Tumor App</h2>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('list_patients') }}">Patient Records</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

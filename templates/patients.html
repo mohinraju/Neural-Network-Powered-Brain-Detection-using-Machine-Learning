@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Patient Records</h1>
+
+{% if patients %}
+  <table class="patient-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Analysis Result</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for patient in patients %}
+      <tr>
+        <td>
+          <a href="{{ url_for('patient_detail', patient_id=patient._id) }}">
+            {{ patient.name }}
+          </a>
+        </td>
+        <td>{{ patient.age }}</td>
+        <td>{{ patient.gender }}</td>
+        <td>{{ patient.result }}</td>
+        <td>{{ patient.date }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('delete_patient', patient_id=patient._id) }}" onsubmit="return confirm('Are you sure you want to delete this record?');">
+            <button type="submit" class="btn-delete">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No patient records found.</p>
+{% endif %}
+
+{% endblock %}

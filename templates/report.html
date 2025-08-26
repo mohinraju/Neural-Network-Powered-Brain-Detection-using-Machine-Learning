@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patient MRI Report</title>
+  <style>
+    .tumor-detected {
+      color: red;
+      font-weight: bold;
+    }
+
+    .no-tumor {
+      color: black;
+      font-weight: bold;
+    }
+
+    .unknown-result {
+      color: orange;
+      font-weight: bold;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .report-wrapper {
+      background: #fff;
+      max-width: 850px;
+      margin: auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(187, 0, 0, 0.15);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+    }
+
+    th,
+    td {
+      padding: 12px 18px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #0072ff;
+      color: white;
+    }
+
+    .confidence {
+      font-weight: bold;
+      color: green;
+    }
+
+    .print-btn {
+      margin: 30px auto 0;
+      display: block;
+      background: #0072ff;
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .print-btn:hover {
+      background: #005fcc;
+    }
+
+    @media print {
+      .print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-wrapper">
+    <h1>🧠 Brain Tumor Detection Report</h1>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Details</th>
+      </tr>
+      <tr>
+        <td>Patient Name</td>
+        <td>{{ patient_name }}</td>
+      </tr>
+      <tr>
+        <td>Age</td>
+        <td>{{ age }}</td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>{{ gender }}</td>
+      </tr>
+      <tr>
+        <td>Analysis Result</td>
+        <td class="{% if result == 'Tumor Detected' %}tumor-detected{% elif result == 'No Tumor Detected' %}no-tumor{% else %}unknown-result{% endif %}">{{ result }}</td>
+      </tr>
+      <tr>
+        <td>Model Confidence</td>
+        <td class="confidence">{{ confidence }}%</td>
+      </tr>
+      <tr>
+        <td>Generated On</td>
+        <td><script>document.write(new Date().toLocaleDateString());</script></td>
+      </tr>
+    </table>
+
+    <p style="margin-top: 25px;">
+      This report should be reviewed and confirmed by a licensed medical professional for treatment planning.
+    </p>
+
+    <button class="print-btn" onclick="window.print()">🖨 Print Report</button>
+  </div>
+  <div style="text-align: center; margin-top: 30px;">
+    <button
+      onclick="goBackHome()"
+      style="padding: 10px 20px; font-weight: bold; background-color: #0072ff; color: white; border: none; border-radius: 6px; cursor: pointer;"
+    >
+      🔙 Go Back to Home
+    </button>
+  </div>
+
+  <script>
+    function goBackHome() {
+      window.location.href = "/";
+    }
+  </script>
+</body>
+</html>
